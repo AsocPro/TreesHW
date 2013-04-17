@@ -99,6 +99,11 @@ public class Backend
      */
     private void delete()
     {
+        if(data.size() == 0)
+        {
+            System.out.println("Database is empty");
+            return;
+        }
         System.out.println("Enter the student number to delete");
         int num = scr.nextInt();
         BSTNode<Student> stu = data.find(new Student(num, "",""));
