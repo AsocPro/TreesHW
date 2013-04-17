@@ -54,7 +54,8 @@ public class BinarySearchTree<E extends Comparable<E>>
         {
             if(temp.getRightChild() == null)
             {
-                temp.setRightChild(new BSTNode<>(element));
+                BSTNode<E> tempNode = new BSTNode<>(temp,null,null,element);
+                temp.setRightChild(tempNode);
                 this.size++;
                 return true;
             }
@@ -65,7 +66,8 @@ public class BinarySearchTree<E extends Comparable<E>>
         {
             if(temp.getLeftChild() == null)
             {
-                temp.setLeftChild(new BSTNode<>(element));
+                BSTNode<E> tempNode = new BSTNode<>(temp,null,null,element);
+                temp.setLeftChild(tempNode);
                 this.size++;
                 return true;
             }
@@ -91,26 +93,132 @@ public class BinarySearchTree<E extends Comparable<E>>
             size--;
             return true;
         }
-        BSTNode<E> temp = node;
-        if(node.getRightChild()== null)
+        //Check to see if it isn't a leaf.
+        if(node.getLeftChild() != null || node.getRightChild() != null)
         {
-            if(node.getLeftChild() != null)
+            BSTNode<E> temp = node;
+            //Choose the side to use to replace.
+            if(temp.getRightChild()!= null)
             {
-                temp.getLeftChild().setParent(temp.getParent());
+                temp = temp.getRightChild();
+                //Check to see if you can "slide" up the rest of the tree.
+                if(temp.getLeftChild() == null)
+                {
+                    if(node == this.root)
+                    {
+                        this.root = temp;
+                    }
+                    temp.setLeftChild(node.getLeftChild());
+                    temp.setParent(node.getParent());
+                    //Connect Parent to Child
+                    if(temp.getParent() != null && temp.getParent().getLeftChild() == temp)
+                    {
+                        temp.getParent().setLeftChild(temp.getRightChild());
+                    }
+                    if(temp.getParent() != null && temp.getParent().getRightChild() == temp)
+                    {
+                        temp.getParent().setRightChild(temp.getRightChild());
+                    }
+                    node.setParent(null);
+                    node.setLeftChild(null);
+                    node.setRightChild(null);
+                    size--;
+                    return true;
+                }
+                while(temp.getLeftChild() != null)
+                {
+                    temp = temp.getLeftChild();
+                }
+                //Check for other children to prevent orphaning them.
+                if(temp.getRightChild() != null)
+                {
+                    temp.getRightChild().setParent(temp.getParent());
+                    //Connect Parent to Child
+                    if(temp.getParent() != null && temp.getParent().getLeftChild() == temp)
+                    {
+                        temp.getParent().setLeftChild(temp.getRightChild());
+                    }
+                    if(temp.getParent() != null && temp.getParent().getRightChild() == temp)
+                    {
+                        temp.getParent().setRightChild(temp.getRightChild());
+                    }
+                }
+            }
+            else
+            {
+                temp = temp.getLeftChild();
+                //Check to see if you can "slide" up the rest of the tree.
+                if(temp.getRightChild() == null)
+                {
+                    if(node == this.root)
+                    {
+                        this.root = temp;
+                    }
+                    temp.setRightChild(node.getRightChild());
+                    temp.setParent(node.getParent());
+                    //Connect parent to child
+                    if(temp.getParent() != null && temp.getParent().getLeftChild() == temp)
+                    {
+                        temp.getParent().setLeftChild(temp.getRightChild());
+                    }
+                    if(temp.getParent() != null && temp.getParent().getRightChild() == temp)
+                    {
+                        temp.getParent().setRightChild(temp.getRightChild());
+                    }
+                    node.setParent(null);
+                    node.setLeftChild(null);
+                    node.setRightChild(null);
+                    size--;
+                    return true;
+                }
+                while(temp.getRightChild() != null)
+                {
+                    temp = temp.getRightChild();
+                }
+                if(temp.getLeftChild() != null)
+                {
+                    temp.getLeftChild().setParent(temp.getParent());
+                    //connect parent to child
+                    if(temp.getParent() != null && temp.getParent().getLeftChild() == temp)
+                    {
+                        temp.getParent().setLeftChild(temp.getLeftChild());
+                    }
+                    if(temp.getParent() != null && temp.getParent().getRightChild() == temp)
+                    {
+                        temp.getParent().setRightChild(temp.getLeftChild());
+                    }
+                }
+            }
+            if(node == this.root)
+            {
+                this.root = temp;
+            }
+            temp.setLeftChild(node.getLeftChild());
+            temp.setRightChild(node.getRightChild());
+            temp.setParent(node.getParent());
+            //Connect parent to child in the deleted place
+            if(node.getParent() != null && node.getParent().getLeftChild() == node)
+            {
+                node.getParent().setLeftChild(temp);
+            }
+            if(node.getParent() != null && node.getParent().getRightChild() == node)
+            {
+                node.getParent().setRightChild(temp);
             }
         }
-        temp = temp.getRightChild();
-        while(temp.getLeftChild() != null)
+        else
         {
-            temp = temp.getLeftChild();
+            //This is if it is a leaf. Null the parent child relationship out
+            if(node.getParent() != null && node.getParent().getLeftChild() == node)
+            {
+                node.getParent().setLeftChild(null);
+            }
+            if(node.getParent() != null && node.getParent().getRightChild() == node)
+            {
+                node.getParent().setRightChild(null);
+            }
         }
-        if(temp.getRightChild() != null)
-        {
-            temp.getRightChild().setParent(temp.getParent());
-        }
-        temp.setLeftChild(node.getLeftChild());
-        temp.setRightChild(node.getRightChild());
-        temp.setParent(node.getParent());
+        
         node.setParent(null);
         node.setLeftChild(null);
         node.setRightChild(null);
@@ -138,6 +246,10 @@ public class BinarySearchTree<E extends Comparable<E>>
     }
     private BSTNode<E> internalFind(BSTNode<E> node, E element)
     {
+        if(node == null)
+        {
+            return null;
+        }
         BSTNode<E> found = null;
         if(node.getElement().equals(element))
         {
@@ -169,6 +281,10 @@ public class BinarySearchTree<E extends Comparable<E>>
     }
     private void internalTraverseInOrder(Visitor visitor, BSTNode<E> node)
     {
+        if(node == null)
+        {
+            return;
+        }
         if(node.getLeftChild() != null)
         {
             internalTraverseInOrder(visitor, node.getLeftChild());
