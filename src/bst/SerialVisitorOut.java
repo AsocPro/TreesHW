@@ -1,7 +1,7 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: SerialVisitorOut.java
  * 
  * Description: This is a Visitor used in the serialization of a BinarySearchTree.

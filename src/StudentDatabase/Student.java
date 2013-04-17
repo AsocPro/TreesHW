@@ -1,7 +1,7 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: Student.java
  * 
  * Description: This is the Student Class to represent a student for the database
@@ -50,40 +50,67 @@ public class Student implements Comparable<Student>, Serializable
         this.major = major;
         this.gpa = gpa;
     }
-
+    /**
+     * Get the Student number
+     * @return The Student Number
+     */
     public int getNumber() 
     {
         return number;
     }
-
+    /**
+     * Get the student's last name
+     * @return Last name of the student
+     */
     public String getLastName() 
     {
         return lastName;
     }
-
+    /**
+     * get the student's first name
+     * @return First name of the student
+     */
     public String getFirstName() 
     {
         return firstName;
     }
+    /**
+     * Get the student's major
+     * @return Major of the student
+     */
     public String getMajor() 
     {
         return major;
     }
-
+    /**
+     * Set the major of the student
+     * @param major Major to set.
+     */
     public void setMajor(String major) 
     {
         this.major = major;
     }
-
+    /**
+     * Get the GPA of the student
+     * @return GPA of the student
+     */
     public double getGpa() 
     {
         return gpa;
     }
-
+    /**
+     * set the GPA of the student
+     * @param gpa of the student
+     */
     public void setGpa(double gpa) 
     {
         this.gpa = gpa;
     }
+    /**
+     * method to compare a student based on their student number
+     * @param stu Student to compare to
+     * @return -1 if the student number is less than the parameter, 1 if it is greater and 0 if they are the same
+     */
     @Override
     public int compareTo(Student stu)
     {
@@ -100,6 +127,11 @@ public class Student implements Comparable<Student>, Serializable
             return -1;
         }
     }
+    /**
+     * Override equals based on the student number.
+     * @param obj object to compare
+     * @return true if the student numbers are the same false if they are not
+     */
     @Override
     public boolean equals(Object obj)
     {
@@ -118,6 +150,10 @@ public class Student implements Comparable<Student>, Serializable
         }
         return false;
     }
+    /**
+     * hashCode overridden for a student
+     * @return student hashcode
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -128,6 +164,10 @@ public class Student implements Comparable<Student>, Serializable
         hash = 53 * hash + (int)(this.gpa*100);
         return hash;
     }
+    /**
+     * Override of the toString method
+     * @return String based student including the number, name, major and gpa
+     */
     @Override
     public String toString()
     {

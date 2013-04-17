@@ -1,7 +1,7 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: StudentAll.java
  * 
  * Description: Visitor to print out all students

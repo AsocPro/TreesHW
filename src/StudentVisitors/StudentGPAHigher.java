@@ -1,7 +1,7 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: STudentGPAHigher.java
  * 
  * Description: Visitor that Prints out a student if their GPA is above a threshhold
@@ -17,7 +17,7 @@ import bst.BSTNode;
  */
 public class StudentGPAHigher implements StudentVisitor
 {
-    private double threshhold;
+    private double threshold;
     /**
      * Print out a student if their GPA is higher than a threshhold
      * @param node Node to visit to get the student data
@@ -26,25 +26,25 @@ public class StudentGPAHigher implements StudentVisitor
     public void visit(BSTNode<Student> node)
     {
         Student stu = node.getElement();
-        if(stu.getGpa() >= threshhold)
+        if(stu.getGpa() >= threshold)
         {
             System.out.println(stu);
         }
     }
     /**
-     * Set the GPA threshhold
-     * @param threshhold GPA threshhold to set
+     * Set the GPA threshold
+     * @param threshhold GPA threshold to set
      */
-    public void setThreshhold(double threshhold)
+    public void setThreshold(double threshhold)
     {
-        this.threshhold = threshhold;
+        this.threshold = threshhold;
     }
     /**
-     * Return the current threshhold
-     * @return Current Threshhold
+     * Return the current threshold
+     * @return Current Threshold
      */
-    public double getThreshhold()
+    public double getThreshold()
     {
-        return threshhold;
+        return threshold;
     }
 }

@@ -1,7 +1,7 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: StudentVisitor.java
  * 
  * Description: Interface for a Student Visitor
@@ -9,8 +9,8 @@
 package StudentVisitors;
 
 import StudentDatabase.Student;
-import bst.Visitor;
 import bst.BSTNode;
+import bst.Visitor;
 
 /**
  *

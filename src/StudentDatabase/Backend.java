@@ -1,17 +1,17 @@
 /*
  * Name: Zachary Pratt 
  * Assignment: Trees
- * Date: 15 April 2013
+ * Date: 17 April 2013
  * File: Backend.java
  * 
  * Description: This is the backend of the Student database.
  */
 package StudentDatabase;
 
-import StudentVisitors.StudentGPALower;
 import StudentVisitors.StudentAll;
-import StudentVisitors.StudentMajor;
 import StudentVisitors.StudentGPAHigher;
+import StudentVisitors.StudentGPALower;
+import StudentVisitors.StudentMajor;
 import bst.BSTNode;
 import bst.BinarySearchTree;
 import java.util.Scanner;
@@ -140,7 +140,7 @@ public class Backend
                 StudentGPAHigher visitGPAHigh = new StudentGPAHigher();
                 System.out.println("Enter the GPA threshhold.");
                 double thresh = scr.nextDouble();
-                visitGPAHigh.setThreshhold(thresh);
+                visitGPAHigh.setThreshold(thresh);
                 System.out.println("#\tName\t\tMajor\t\tGPA");
                 data.traverseInOrder(visitGPAHigh);
                 
@@ -149,7 +149,7 @@ public class Backend
                 StudentGPALower visitGPALow = new StudentGPALower();
                 System.out.println("Enter the GPA threshhold.");
                 double thresh2 = scr.nextDouble();
-                visitGPALow.setThreshhold(thresh2);
+                visitGPALow.setThreshold(thresh2);
                 System.out.println("#\tName\t\tMajor\t\tGPA");
                 data.traverseInOrder(visitGPALow);
                 break;
