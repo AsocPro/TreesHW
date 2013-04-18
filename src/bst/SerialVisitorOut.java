@@ -27,6 +27,10 @@ public class SerialVisitorOut<E extends Comparable<E>> implements Visitor<E>
         out = new ObjectOutputStream(new FileOutputStream(filename));
         out.writeInt(size);
     }
+    /**
+     * Visit the node and write out the element to disk
+     * @param node The node to be visited.
+     */
     @Override
     public void visit(BSTNode<E> node)
     {
