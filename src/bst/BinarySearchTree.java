@@ -20,24 +20,44 @@ public class BinarySearchTree<E extends Comparable<E>>
 {
     private BSTNode<E> root;
     private int size;
+    /**
+     * Default BinarySearchTree Constructor
+     */
     public BinarySearchTree()
     {
         root = null;
         size = 0;
     }
+    /**
+     * Constructor to start off with an element
+     * @param element element to start the tree with.
+     */
     public BinarySearchTree(E element)
     {
         root = new BSTNode<>(element);
         size = 1;
     }
+    /**
+     * Get the Root of the tree
+     * @return Root of the tree
+     */
     public BSTNode<E> root()
     {
         return root;
     }
+    /**
+     * Get the size of the tree
+     * @return Size of the tree
+     */
     public int size()
     {
         return size;
     }
+    /**
+     * Add an element to the Tree
+     * @param element Element to add
+     * @return true if added false if not added.
+     */
     public boolean add(E element)
     {
         if(this.size == 0)
@@ -48,6 +68,12 @@ public class BinarySearchTree<E extends Comparable<E>>
         }
         return addInternal(root,element);
     }
+    /**
+     * Internal helper method for the add method
+     * @param temp a temporary node used to find where the element fits in the tree
+     * @param element Element to add to the tree
+     * @return true if added false if not added
+     */
     private boolean addInternal(BSTNode<E> temp, E element)
     {
         if(temp.compareTo(element) < 0)
@@ -79,6 +105,11 @@ public class BinarySearchTree<E extends Comparable<E>>
             return false;
         }
     }
+    /**
+     * Remove a Node from the tree
+     * @param node Node to remove
+     * @return true if the node was removed false if it wasn't
+     */
     public boolean remove(BSTNode<E> node)
     {
         if(this.size==0)
@@ -225,6 +256,11 @@ public class BinarySearchTree<E extends Comparable<E>>
         size--;
         return true;
     }
+    /**
+     * Find an element in the tree.
+     * @param element Element to search for
+     * @return BSTNode containing the element or null if it doesn't exist
+     */
     public BSTNode<E> find(E element)
     {
         if(this.size==0)
@@ -244,6 +280,12 @@ public class BinarySearchTree<E extends Comparable<E>>
         found = internalFind(root.getRightChild(), element);
         return found;
     }
+    /**
+     * Internal helper method to find an element in the tree
+     * @param node Node to search
+     * @param element Element to search for
+     * @return BSTNode where the is found. Null if it isn't found.
+     */
     private BSTNode<E> internalFind(BSTNode<E> node, E element)
     {
         if(node == null)
@@ -263,6 +305,10 @@ public class BinarySearchTree<E extends Comparable<E>>
         found = internalFind(node.getRightChild(), element);
         return found;
     }
+    /**
+     * Traverse the Tree in order
+     * @param visitor visitor to use to visit the tree
+     */
     public void traverseInOrder(Visitor visitor)
     {
         if(this.size==0)
@@ -279,6 +325,11 @@ public class BinarySearchTree<E extends Comparable<E>>
             internalTraverseInOrder(visitor, root.getRightChild());
         }
     }
+    /**
+     * Internal helper method for in order traversal
+     * @param visitor visitor to use
+     * @param node Node to visit
+     */
     private void internalTraverseInOrder(Visitor visitor, BSTNode<E> node)
     {
         if(node == null)
@@ -295,6 +346,10 @@ public class BinarySearchTree<E extends Comparable<E>>
             internalTraverseInOrder(visitor, node.getRightChild());
         }
     }
+    /**
+     * Traverse the BinarySearchTree using pre order
+     * @param visitor Visitor to visit the nodes.
+     */
     public void traversePreOrder(Visitor visitor)
     {
         if(this.size==0)
@@ -311,6 +366,11 @@ public class BinarySearchTree<E extends Comparable<E>>
             internalTraverseInOrder(visitor, root.getRightChild());
         }
     }
+    /**
+     * Internal helper method for Preorder Traversal
+     * @param visitor Visitor to use
+     * @param node node to visit.
+     */
     private void internalTraversePreOrder(Visitor visitor, BSTNode<E> node)
     {
         visitor.visit(node);
@@ -323,6 +383,10 @@ public class BinarySearchTree<E extends Comparable<E>>
             internalTraverseInOrder(visitor, node.getRightChild());
         }
     }
+    /**
+     * Write out the BinarySearchTree to file
+     * @param filename The file name to write out.
+     */
     public void writeOut(String filename)
     {
         try 
@@ -336,6 +400,10 @@ public class BinarySearchTree<E extends Comparable<E>>
             System.out.println("File error");
         }
     }
+    /**
+     * Write in a BinarySearchTree from a file
+     * @param filename name of the file to write in.
+     */
     public void writeIn(String filename)
     {
         try
