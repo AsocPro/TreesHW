@@ -8,8 +8,6 @@
  */
 package bst;
 
-import bst.BSTNode;
-
 /**
  *
  * @author Zachary Pratt Gibbs
